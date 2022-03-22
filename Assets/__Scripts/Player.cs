@@ -17,6 +17,7 @@ public class Player : MonoBehaviour {
     public SpriteRenderer spriteRenderer;
     public Transform attackPoint;
     public LayerMask enemyLayers;
+    public bool isDead = false;
 
     // Awake is called when the script instance is being loaded
     void Awake() {
@@ -35,7 +36,8 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         //variable declaration
-        float horizontal = Input.GetAxis("Horizontal");
+        if(!isDead){
+            float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
         //handles player animation
@@ -56,13 +58,6 @@ public class Player : MonoBehaviour {
             Attack();
         }
 
-        if(Time.time >= nextAttackTime) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
-        }
-
         //moves the player
         Move(horizontal, vertical);
 
@@ -70,6 +65,15 @@ public class Player : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             Teleport(horizontal, vertical);
         }
+
+        }
+        if(Time.time >= nextAttackTime) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
+        }
+
 
         //code used for invincibility
         if (Input.GetKeyDown(KeyCode.E)) {
@@ -80,6 +84,11 @@ public class Player : MonoBehaviour {
         //code used for activating a damage boost
         if (Input.GetKeyDown(KeyCode.Q)) {
             DamageBoost();
+        }
+
+        //code for testing death
+        if(Input.GetKeyDown(KeyCode.P)) {
+            Die();
         }
 
         //after 30 seconds invincibility ends
@@ -180,17 +189,17 @@ public class Player : MonoBehaviour {
 
     //method that executes when the player's health reaches 0
     void Die() {
-
+        isDead = true;
         //player death animation
-
+        animator.SetTrigger("Death");
         //resets the game when the player dies
-        Invoke("Reset", 5);
+        Invoke("Reset", 1.3f);
 
     }
 
     //resets the game and re-initializes everything
     private void Reset() {
-        SceneManager.LoadScene("_Scene_0");
+        SceneManager.LoadScene("_Scene_1");
         playerHealth = 100;
         damageBoostCooldown = 0;
         healthResetCooldown = 100000;
