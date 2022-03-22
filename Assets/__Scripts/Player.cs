@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
     public Animator animator;
     public SpriteRenderer spriteRenderer;
 
+
     // Awake is called when the script instance is being loaded
     void Awake() {
         playerhealth = 100;
@@ -23,7 +24,7 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
+      
         if(horizontal!=0||vertical!=0){
             animator.SetFloat("Speed",1);
         }else{
@@ -40,7 +41,6 @@ public class Player : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Space)){
             Attack();
         }
-
         //moves the player
         Move(horizontal, vertical);
 
