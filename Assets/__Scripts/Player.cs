@@ -24,6 +24,25 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+
+        //handles player animation
+        if(horizontal!=0||vertical!=0){
+            animator.SetFloat("Speed",1);
+        }else{
+            animator.SetFloat("Speed",0);
+        }
+
+        if(horizontal<0){
+            spriteRenderer.flipX=true;
+        }
+        if(horizontal>0){
+            spriteRenderer.flipX=false;
+        }
+
+        //handles player attack
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Attack();
+        }
       
         if(horizontal!=0||vertical!=0){
             animator.SetFloat("Speed",1);
@@ -41,6 +60,7 @@ public class Player : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Space)){
             Attack();
         }
+
         //moves the player
         Move(horizontal, vertical);
 
@@ -80,10 +100,10 @@ public class Player : MonoBehaviour {
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
     }
 
+    //attack method
     void Attack(){
         animator.SetTrigger("Attack");
     }
-
 
     //teleport method
     void Teleport(float horizontal, float vertical) {
