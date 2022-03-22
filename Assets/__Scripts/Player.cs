@@ -2,31 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-<<<<<<< Updated upstream
 
-public class Player : MonoBehaviour {
-
-    //variable declarations
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    float speed = 30;
-    float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
-    float playerhealth, playerHealthBeforeInvincibility;
-    float playerDamage;
-=======
-=======
->>>>>>> Stashed changes
-    int playerDamage;
-    float speed = 2;
-    float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
-=======
 public class Player : MonoBehaviour {
 
     //variable declarations
     int playerDamage;
     float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
->>>>>>> Stashed changes
     float playerHealth, playerHealthBeforeInvincibility;
     float attackRange = 0.5f;
     float attackRate = 2f;
@@ -36,14 +18,9 @@ public class Player : MonoBehaviour {
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
->>>>>>> Stashed changes
-
     // Awake is called when the script instance is being loaded
     void Awake() {
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
         //initializes player health and damage
         playerHealth = 100;
         playerDamage = 50;
@@ -60,12 +37,6 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-
-=======
-=======
->>>>>>> Stashed changes
 
         //handles player animation
         if(horizontal!=0||vertical!=0){
@@ -81,32 +52,20 @@ public class Player : MonoBehaviour {
         }
 
         //handles player attack
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
->>>>>>> Stashed changes
         if(Input.GetKeyDown(KeyCode.Space)){
             Attack();
         }
 
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-=======
->>>>>>> Stashed changes
         if(Time.time >= nextAttackTime) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+
         //moves the player
         Move(horizontal, vertical);
+
         //code used for player teleporting
         if (Input.GetKeyDown(KeyCode.LeftShift)) {
             Teleport(horizontal, vertical);
@@ -142,16 +101,10 @@ public class Player : MonoBehaviour {
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
     }
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-=======
->>>>>>> Stashed changes
     //attack method
     void Attack(){
 
         animator.SetTrigger("Attack");
-<<<<<<< Updated upstream
 
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
 
@@ -159,17 +112,6 @@ public class Player : MonoBehaviour {
             enemy.GetComponent<EnemyScript>().TakeDamage(playerDamage);
         }
     }
-
->>>>>>> Stashed changes
-=======
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach(Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<EnemyScript>().TakeDamage(playerDamage);
-        }
-    }
->>>>>>> Stashed changes
 
     //teleport method
     void Teleport(float horizontal, float vertical) {
@@ -183,9 +125,10 @@ public class Player : MonoBehaviour {
 
     //invincibility method
     void Invincibility() {
+
         if (invincibilityCooldown <= 0) {
             //sets the invincibility cooldown to 3 minutes and makes the player invincible, after 30 seconds invincibility will end
-            healthResetCooldown = 10;
+            healthResetCooldown = 15;
             invincibilityCooldown = 180;
             playerHealth = 10000;
         }
@@ -193,19 +136,15 @@ public class Player : MonoBehaviour {
 
     //resets health after invincibility ends
     void HealthReset(float health) {
-<<<<<<< Updated upstream
+
        //resets the player's health to before invincibility, and then sets the cooldown to infinity, as not to activate the method again 
        playerHealth = health;
        healthResetCooldown = 1000000;
-=======
-        //resets the player's health to before invincibility, and then sets the cooldown to infinity, as not to activate the method again 
-        playerHealth = health;
-        healthResetCooldown = 1000000;
->>>>>>> Stashed changes
     }
 
     //damage boost method
     void DamageBoost() {
+
         if (damageBoostCooldown <= 0) {
             //sets to cooldown to 2 minutes, doubles the players damage and after 15 seconds removes the damage boost
             damageBoostCooldown = 120;
@@ -221,46 +160,11 @@ public class Player : MonoBehaviour {
 
     //method to handle collisions
     void OnCollisionEnter(Collision collision) {
-<<<<<<< Updated upstream
 
         //when picking up the screenWipe collectable it gives the player an ability to destroy all enemies on the screen
         if(collision.gameObject.tag == "screenWipe") {
             this.GetComponent<CollectableNewSkill>().Activate();
         }
-=======
-        //when picking up the screenWipe collectable it gives the player an ability to destroy all enemies on the screen
-        if (collision.gameObject.tag == "screenWipe") {
-            this.GetComponent<CollectableNewSkill>().Activate();
-        }
-    }
-
-    //method that executes when the player's takes damage
-    public void TakeDamage(int damage) {
-        playerHealth -= damage;
-        //do damage taken animation
-        if (playerHealth <= 0) {
-            Die();
-        }
-    }
-
-    //method that executes when the player's health reaches 0
-    void Die() {
-
-        //player death animation
-
-        //resets the game when the player dies
-        Invoke("Reset", 10);
-    }
-
-    //resets the game and re-initializes everything
-    private void Reset() {
-        SceneManager.LoadScene("_Scene_1");
-        playerHealth = 100;
-        damageBoostCooldown = 0;
-        healthResetCooldown = 100000;
-        invincibilityCooldown = 0;
-        teleportCooldown = 0;
->>>>>>> Stashed changes
     }
 
     //method that executes when the player's takes damage
@@ -280,7 +184,7 @@ public class Player : MonoBehaviour {
         //player death animation
 
         //resets the game when the player dies
-        Invoke("Reset", 10);
+        Invoke("Reset", 5);
 
     }
 
