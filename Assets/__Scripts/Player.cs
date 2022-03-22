@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     //variable declarations
+    int playerDamage;
     float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerhealth, playerHealthBeforeInvincibility;
