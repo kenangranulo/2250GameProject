@@ -6,11 +6,14 @@ public class Player : MonoBehaviour {
 
     //variable declarations
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     float speed = 30;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerhealth, playerHealthBeforeInvincibility;
     float playerDamage;
 =======
+=======
+>>>>>>> Stashed changes
     int playerDamage;
     float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
