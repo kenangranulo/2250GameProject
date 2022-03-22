@@ -174,13 +174,19 @@ public class Player : MonoBehaviour {
         if(collision.gameObject.tag == "screenWipe") {
             this.GetComponent<CollectableNewSkill>().Activate();
         }
+
+        if(collision.gameObject.tag == "Ghost") {
+            TakeDamage(20);
+        }
+
+        if(collision.gameObject.tag == "Skeleton") {
+            TakeDamage(25);
+        }
     }
 
     //method that executes when the player's takes damage
     public void TakeDamage(int damage) {
         playerHealth -= damage;
-
-        //do damage taken animation
 
         if (playerHealth <= 0) {
             Die();
@@ -192,6 +198,7 @@ public class Player : MonoBehaviour {
         isDead = true;
         //player death animation
         animator.SetTrigger("Death");
+
         //resets the game when the player dies
         Invoke("Reset", 1.3f);
 
