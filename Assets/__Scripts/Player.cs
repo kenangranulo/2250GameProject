@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     float speed = 4;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerHealth, playerHealthBeforeInvincibility;
-    float attackRange = 0.5f;
+    float attackRange = 0.4f;
     float attackRate = 2f;
     float nextAttackTime = 0f;
     public Animator animator;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
 
         //initializes player health and damage
         playerHealth = 100;
-        playerDamage = 50;
+        playerDamage = 30;
 
         //initializes the cooldowns so that all abilities are available off spawn
         teleportCooldown = 0;
