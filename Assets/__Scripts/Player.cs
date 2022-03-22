@@ -5,10 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     //variable declarations
-    float speed = 30;
+    float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerhealth, playerHealthBeforeInvincibility;
     float playerDamage;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
+
 
     // Awake is called when the script instance is being loaded
     void Awake() {
@@ -21,7 +24,23 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+      
+        if(horizontal!=0||vertical!=0){
+            animator.SetFloat("Speed",1);
+        }else{
+            animator.SetFloat("Speed",0);
+        }
 
+        if(horizontal<0){
+            spriteRenderer.flipX=true;
+        }
+        if(horizontal>0){
+            spriteRenderer.flipX=false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Attack();
+        }
         //moves the player
         Move(horizontal, vertical);
 
@@ -59,6 +78,10 @@ public class Player : MonoBehaviour {
     void Move(float horizontal, float vertical) {
         //change the position of the player
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
+    }
+
+    void Attack(){
+        animator.SetTrigger("Attack");
     }
 
 
