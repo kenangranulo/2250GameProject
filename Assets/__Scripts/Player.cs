@@ -8,15 +8,18 @@ public class Player : MonoBehaviour {
     float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerhealth, playerHealthBeforeInvincibility;
-    float playerDamage;
+    float attackRange = 0.5f;
+    float attackRate = 2f;
+    float nextAttackTime = 0f;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
-
+    public Transform attackPoint;
+    public LayerMask enemyLayers;
 
     // Awake is called when the script instance is being loaded
     void Awake() {
         playerhealth = 100;
-        playerDamage = 5;
+        playerDamage = 50;
     }
 
     // Update is called once per frame
@@ -40,27 +43,13 @@ public class Player : MonoBehaviour {
         }
 
         //handles player attack
-        if(Input.GetKeyDown(KeyCode.Space)){
-            Attack();
+        if(Time.time >= nextAttackTime) {
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                Attack();
+                nextAttackTime = Time.time + 1f / attackRate;
+            }
         }
-      
-        if(horizontal!=0||vertical!=0){
-            animator.SetFloat("Speed",1);
-        }else{
-            animator.SetFloat("Speed",0);
-        }
-
-        if(horizontal<0){
-            spriteRenderer.flipX=true;
-        }
-        if(horizontal>0){
-            spriteRenderer.flipX=false;
-        }
-
-        if(Input.GetKeyDown(KeyCode.Space)){
-            Attack();
-        }
-
+       
         //moves the player
         Move(horizontal, vertical);
 
@@ -103,6 +92,12 @@ public class Player : MonoBehaviour {
     //attack method
     void Attack(){
         animator.SetTrigger("Attack");
+
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
+
+        foreach(Collider2D enemy in hitEnemies) {
+            enemy.GetComponent<EnemyScript>().TakeDamage(playerDamage);
+        }
     }
 
     //teleport method
