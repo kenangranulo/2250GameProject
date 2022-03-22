@@ -5,10 +5,13 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     //variable declarations
-    float speed = 30;
+    float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerhealth, playerHealthBeforeInvincibility;
     float playerDamage;
+    public Animator animator;
+    public SpriteRenderer spriteRenderer;
+
 
     // Awake is called when the script instance is being loaded
     void Awake() {
@@ -21,9 +24,6 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-<<<<<<< Updated upstream
-
-=======
 
         //handles player animation
         if(horizontal!=0||vertical!=0){
@@ -43,8 +43,24 @@ public class Player : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.Space)){
             Attack();
         }
+      
+        if(horizontal!=0||vertical!=0){
+            animator.SetFloat("Speed",1);
+        }else{
+            animator.SetFloat("Speed",0);
+        }
 
->>>>>>> Stashed changes
+        if(horizontal<0){
+            spriteRenderer.flipX=true;
+        }
+        if(horizontal>0){
+            spriteRenderer.flipX=false;
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Attack();
+        }
+
         //moves the player
         Move(horizontal, vertical);
 
@@ -84,14 +100,10 @@ public class Player : MonoBehaviour {
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
     }
 
-<<<<<<< Updated upstream
-=======
     //attack method
     void Attack(){
         animator.SetTrigger("Attack");
     }
-
->>>>>>> Stashed changes
 
     //teleport method
     void Teleport(float horizontal, float vertical) {
