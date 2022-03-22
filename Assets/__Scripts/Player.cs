@@ -1,38 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour {
 
     //variable declarations
-
     [SerializeField] float speed = 3;
-
-    int playerDamage;
-   
-
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
-    float playerHealth, playerHealthBeforeInvincibility;
-    float attackRange = 0.5f;
-    float attackRate = 2f;
-    float nextAttackTime = 0f;
+    float playerhealth, playerHealthBeforeInvincibility;
+    float playerDamage;
     public Animator animator;
     public SpriteRenderer spriteRenderer;
-    public Transform attackPoint;
-    public LayerMask enemyLayers;
+
 
     // Awake is called when the script instance is being loaded
     void Awake() {
-        //initializes player health and damage
-        playerHealth = 100;
-        playerDamage = 50;
-
-        //initializes the cooldowns so that all abilities are available off spawn
-        teleportCooldown = 0;
-        damageBoostCooldown = 0;
-        healthResetCooldown = 1000000;
-        invincibilityCooldown = 0;
+        playerhealth = 100;
+        playerDamage = 5;
     }
 
     // Update is called once per frame
@@ -40,8 +24,7 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-
-        //handles player animation
+      
         if(horizontal!=0||vertical!=0){
             animator.SetFloat("Speed",1);
         }else{
@@ -55,14 +38,9 @@ public class Player : MonoBehaviour {
             spriteRenderer.flipX=false;
         }
 
-        //handles player attack
-        if(Time.time >= nextAttackTime) {
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                Attack();
-                nextAttackTime = Time.time + 1f / attackRate;
-            }
+        if(Input.GetKeyDown(KeyCode.Space)){
+            Attack();
         }
-       
         //moves the player
         Move(horizontal, vertical);
 
@@ -73,7 +51,7 @@ public class Player : MonoBehaviour {
 
         //code used for invincibility
         if (Input.GetKeyDown(KeyCode.E)) {
-            playerHealthBeforeInvincibility = playerHealth;
+            playerHealthBeforeInvincibility = playerhealth;
             Invincibility();
         }
 
@@ -102,23 +80,17 @@ public class Player : MonoBehaviour {
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
     }
 
-    //attack method
     void Attack(){
         animator.SetTrigger("Attack");
-
-        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayers);
-
-        foreach(Collider2D enemy in hitEnemies) {
-            enemy.GetComponent<EnemyScript>().TakeDamage(playerDamage);
-        }
     }
+
 
     //teleport method
     void Teleport(float horizontal, float vertical) {
         //teleports the player if the cooldown is gone
         if (teleportCooldown <= 0) {
             teleportCooldown = 10;
-            transform.position = transform.position + new Vector3(horizontal * 5f, vertical * 5f, 0f);
+            transform.position = transform.position + new Vector3(horizontal * 20f, vertical * 20f, 0f);
         }
     }
 
@@ -126,16 +98,16 @@ public class Player : MonoBehaviour {
     void Invincibility() {
         if (invincibilityCooldown <= 0) {
             //sets the invincibility cooldown to 3 minutes and makes the player invincible, after 30 seconds invincibility will end
-            healthResetCooldown = 10;
+            healthResetCooldown = 30;
             invincibilityCooldown = 180;
-            playerHealth = 10000;
+            playerhealth = 10000;
         }
     }
 
     //resets health after invincibility ends
     void HealthReset(float health) {
-       //resets the player's health to before invincibility, and then sets the cooldown to infinity, as not to activate the method again 
-       playerHealth = health;
+       //resets the player's health to before invincibility, and then sets the cooldown to infinity 
+       playerhealth = health;
        healthResetCooldown = 1000000;
     }
 
@@ -151,46 +123,6 @@ public class Player : MonoBehaviour {
 
     //resets the player's damage
     void DamageReset() {
-        playerDamage = playerDamage / 2;
-    }
-
-    //method to handle collisions
-    void OnCollisionEnter(Collision collision) {
-
-        //when picking up the screenWipe collectable it gives the player an ability to destroy all enemies on the screen
-        if(collision.gameObject.tag == "screenWipe") {
-            this.GetComponent<CollectableNewSkill>().Activate();
-        }
-    }
-
-    //method that executes when the player's takes damage
-    public void TakeDamage(int damage) {
-        playerHealth -= damage;
-
-        //do damage taken animation
-
-        if (playerHealth <= 0) {
-            Die();
-        }
-    }
-
-    //method that executes when the player's health reaches 0
-    void Die() {
-
-        //player death animation
-
-        //resets the game when the player dies
-        Invoke("Reset", 10);
-
-    }
-
-    //resets the game and re-initializes everything
-    private void Reset() {
-        SceneManager.LoadScene("_Scene_0");
-        playerHealth = 100;
-        damageBoostCooldown = 0;
-        healthResetCooldown = 100000;
-        invincibilityCooldown = 0;
-        teleportCooldown = 0;
+        playerDamage = 5;
     }
 }
