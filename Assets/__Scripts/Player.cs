@@ -165,6 +165,15 @@ public class Player : MonoBehaviour {
 
     //resets the player's damage
     void DamageReset() {
-        playerDamage = 5;
+        playerDamage = playerDamage / 2;
+    }
+
+    //method to handle collisions
+    void OnCollisionEnter(Collision collision) {
+
+        //when picking up the screenWipe collectable it gives the player an ability to destroy all enemies on the screen
+        if(collision.gameObject.tag == "screenWipe") {
+            this.GetComponent<CollectableNewSkill>().Activate();
+        }
     }
 }
