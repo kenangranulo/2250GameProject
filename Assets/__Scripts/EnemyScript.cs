@@ -23,8 +23,6 @@ public class EnemyScript : MonoBehaviour {
     public void TakeDamage(int damage) {
         currentHealth -= damage;
 
-        //do damage taken animation
-
         if (currentHealth <= 0) {
             Die();
         }

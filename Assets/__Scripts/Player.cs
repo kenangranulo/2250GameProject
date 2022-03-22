@@ -215,4 +215,5 @@ public class Player : MonoBehaviour {
         invincibilityCooldown = 0;
         teleportCooldown = 0;
     }
+
 }
