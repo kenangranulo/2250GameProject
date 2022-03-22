@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     float speed = 4;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerHealth, playerHealthBeforeInvincibility;
-    float attackRange = 0.4f;
+    float attackRange = 1.2f;
     float attackRate = 2f;
     float nextAttackTime = 0f;
     public Animator animator;
