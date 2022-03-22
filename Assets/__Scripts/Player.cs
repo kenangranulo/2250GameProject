@@ -5,15 +5,6 @@ using UnityEngine;
 public class Player : MonoBehaviour {
 
     //variable declarations
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-    float speed = 30;
-    float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
-    float playerhealth, playerHealthBeforeInvincibility;
-    float playerDamage;
-=======
-=======
->>>>>>> Stashed changes
     int playerDamage;
     float speed = 2;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
@@ -26,8 +17,6 @@ public class Player : MonoBehaviour {
     public Transform attackPoint;
     public LayerMask enemyLayers;
 
->>>>>>> Stashed changes
-
     // Awake is called when the script instance is being loaded
     void Awake() {
         playerhealth = 100;
@@ -39,9 +28,6 @@ public class Player : MonoBehaviour {
         //variable declaration
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-<<<<<<< Updated upstream
-
-=======
 
         //handles player animation
         if(horizontal!=0||vertical!=0){
@@ -58,21 +44,13 @@ public class Player : MonoBehaviour {
         }
 
         //handles player attack
-<<<<<<< Updated upstream
-        if(Input.GetKeyDown(KeyCode.Space)){
-            Attack();
-        }
-
->>>>>>> Stashed changes
-=======
         if(Time.time >= nextAttackTime) {
             if (Input.GetKeyDown(KeyCode.Space)) {
                 Attack();
                 nextAttackTime = Time.time + 1f / attackRate;
             }
         }
-        
->>>>>>> Stashed changes
+       
         //moves the player
         Move(horizontal, vertical);
 
@@ -112,8 +90,6 @@ public class Player : MonoBehaviour {
         transform.position = transform.position + new Vector3(horizontal * speed * Time.deltaTime, vertical * speed * Time.deltaTime, 0);
     }
 
-<<<<<<< Updated upstream
-=======
     //attack method
     void Attack(){
         animator.SetTrigger("Attack");
@@ -124,8 +100,6 @@ public class Player : MonoBehaviour {
             enemy.GetComponent<EnemyScript>().TakeDamage(playerDamage);
         }
     }
-
->>>>>>> Stashed changes
 
     //teleport method
     void Teleport(float horizontal, float vertical) {
