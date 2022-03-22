@@ -21,6 +21,7 @@ public class SkeletonScript : MonoBehaviour
     public void inRadius()
     {
         animator.SetFloat("Speed", 1);
+        transform.localScale = new Vector3(2.5f,2.5f,1);
         transform.position = Vector3.MoveTowards(transform.position, hero.transform.position, .006f);
         float direction = hero.transform.position.x - transform.position.x;
         if (direction < 0)
