@@ -6,8 +6,12 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour {
 
     //variable declarations
+
+    [SerializeField] float speed = 3;
+
     int playerDamage;
-    float speed = 2;
+   
+
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerHealth, playerHealthBeforeInvincibility;
     float attackRange = 0.5f;
