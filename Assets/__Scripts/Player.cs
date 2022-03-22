@@ -7,7 +7,7 @@ public class Player : MonoBehaviour {
 
     //variable declarations
     int playerDamage;
-    float speed = 2;
+    float speed = 4;
     float teleportCooldown, invincibilityCooldown, healthResetCooldown, damageBoostCooldown;
     float playerHealth, playerHealthBeforeInvincibility;
     float attackRange = 0.5f;
