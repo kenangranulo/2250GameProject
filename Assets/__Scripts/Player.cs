@@ -168,10 +168,11 @@ public class Player : MonoBehaviour {
     }
 
     //method to handle collisions
-    void OnCollisionEnter(Collision collision) {
+    void OnCollisionEnter2D(Collision2D collision) {
 
         //when picking up the screenWipe collectable it gives the player an ability to destroy all enemies on the screen
         if(collision.gameObject.tag == "screenWipe") {
+            Destroy(collision.gameObject);
             this.GetComponent<CollectableNewSkill>().Activate();
         }
 
@@ -180,6 +181,7 @@ public class Player : MonoBehaviour {
         }
 
         if(collision.gameObject.tag == "Skeleton") {
+            Debug.Log("something");
             TakeDamage(25);
         }
     }
