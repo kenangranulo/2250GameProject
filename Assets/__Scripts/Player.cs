@@ -181,7 +181,6 @@ public class Player : MonoBehaviour {
         }
 
         if(collision.gameObject.tag == "Skeleton") {
-            Debug.Log("something");
             TakeDamage(25);
         }
     }
