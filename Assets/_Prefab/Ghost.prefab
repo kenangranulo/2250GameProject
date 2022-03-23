@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5754157813284800921}
   - component: {fileID: 4485518368656582943}
   - component: {fileID: 1197510980599056415}
-  m_Layer: 0
+  - component: {fileID: 6339790167661379865}
+  m_Layer: 7
   m_Name: Ghost
-  m_TagString: Untagged
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0917c582dd25bd94b843078672057eee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Hero: {fileID: 0}
+  Hero: {fileID: 288131256159044916, guid: ba8822f57adbb40b399405581a728adb, type: 3}
   spriteRenderer: {fileID: 5754157813284800920}
 --- !u!61 &1197510980599056415
 BoxCollider2D:
@@ -144,3 +145,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0530729, y: 1.729656}
   m_EdgeRadius: 0
+--- !u!114 &6339790167661379865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754157813284800614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26adc29e2cecd4f8484871f6ab21f24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100

@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 5364777310914497985}
   - component: {fileID: 5364777310914497987}
   - component: {fileID: 525830991346856583}
-  m_Layer: 0
+  - component: {fileID: -3773918288748233792}
+  m_Layer: 7
   m_Name: Skeleton
-  m_TagString: Untagged
+  m_TagString: Skeleton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a78d8ffe939479642a0661ff032f911c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hero: {fileID: 0}
+  hero: {fileID: 288131256159044916, guid: ba8822f57adbb40b399405581a728adb, type: 3}
   spriteRenderer: {fileID: 5364777310914497984}
   animator: {fileID: 5364777310914497985}
 --- !u!61 &525830991346856583
@@ -129,7 +130,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0054541826, y: -0.18544294}
@@ -145,3 +146,16 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0477479, y: 1.2541142}
   m_EdgeRadius: 0
+--- !u!114 &-3773918288748233792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5364777310914497991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26adc29e2cecd4f8484871f6ab21f24c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
