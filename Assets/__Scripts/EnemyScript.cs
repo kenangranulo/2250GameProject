@@ -6,7 +6,7 @@ public class EnemyScript : MonoBehaviour {
 
     public int maxHealth = 100;
     int currentHealth;
-
+    public Animator animator;
     // Start is called before the first frame update
     void Start() {
 
@@ -26,8 +26,12 @@ public class EnemyScript : MonoBehaviour {
     void Die() {
 
         //make the enemy dead animation
-
+        animator.SetTrigger("Death");
+        Invoke("DestroyGO",0.83f);
         GetComponent<Collider2D>().enabled = false;
+    }
+
+    void DestroyGO(){
         Destroy(this.gameObject);
     }
 }
