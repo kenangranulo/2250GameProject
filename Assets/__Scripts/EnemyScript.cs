@@ -29,6 +29,12 @@ public class EnemyScript : MonoBehaviour {
         animator.SetTrigger("Death");
         Invoke("DestroyGO",0.83f);
         GetComponent<Collider2D>().enabled = false;
+        if(this.gameObject.tag=="Skeleton"){
+            ScoreScript.score+=10;
+        }
+        if(this.gameObject.tag=="Ghost"){
+            ScoreScript.score+=5;
+        }
     }
 
     void DestroyGO(){
